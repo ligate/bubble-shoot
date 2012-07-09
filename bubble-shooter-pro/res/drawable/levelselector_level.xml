@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true" android:state_enabled="true" android:drawable="@drawable/levelselector_level_unlocked_focused_transition" />
+    <item android:state_enabled="true" android:state_selected="true" android:drawable="@drawable/levelselector_level_unlocked_focused_transition" />
+    <item android:state_enabled="true" android:drawable="@drawable/levelselector_level_unlocked" />
+    <item android:state_focused="true" android:state_enabled="false" android:drawable="@drawable/levelselector_level_locked_focused_transition" />
+    <item android:state_enabled="false" android:state_selected="true" android:drawable="@drawable/levelselector_level_locked_focused_transition" />
+    <item android:drawable="@drawable/levelselector_level_locked" />
+</selector>

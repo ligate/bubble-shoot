@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:gravity="center"
+	android:layout_width="match_parent" android:layout_height="wrap_content"
+	xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:background="@drawable/rank_frame">
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:gravity="center"
+		android:textColor="@android:color/white" android:id="@+id/scorerank"
+		android:text="@string/menu_button_score" android:drawableLeft="@drawable/rank1" android:layout_weight="1" android:layout_marginBottom="6dip"/>
+	
+	
+	
+	<TextView android:id="@+id/levelrank" android:layout_weight="1.0" android:gravity="center" android:layout_height="wrap_content" android:textColor="@android:color/white"
+	     android:layout_width="wrap_content" android:text="@string/menu_button_level" android:drawableLeft="@drawable/rank3" android:layout_margin="6dip" />
+	   
+	<TextView android:id="@+id/honor" android:layout_weight="1.0" android:gravity="center" android:layout_height="wrap_content"  android:textColor="@android:color/white" 
+	    android:layout_width="wrap_content" android:text="@string/menu_button_honor" android:drawableLeft="@drawable/rank4" android:layout_margin="6dip" />
+	   
+</LinearLayout>

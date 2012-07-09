@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+	<style name="RankPopupAnimation" parent="android:Animation">    
+       <item name="android:windowEnterAnimation">@anim/popup_down</item>   
+       <item name="android:windowExitAnimation">@anim/popup_up</item>   
+    </style>
+    <style name="NavigationTitle">
+        <item name="android:textSize">25sp</item> 
+        <item name="android:shadowColor">#faaa</item> 
+        <item name="android:shadowDx">1.2</item> 
+        <item name="android:shadowDy">2.2</item> 
+        <item name="android:shadowRadius">1.5</item> 
+    </style>
+
+    <style name="NavigationButton">
+        <item name="android:paddingLeft">18dp</item> 
+        <item name="android:paddingRight">18dp</item> 
+        <item name="android:minWidth">150dp</item> 
+    </style>
+
+    <style name="ErrorTitle" parent="style/NavigationTitle">
+        <item name="android:textColor">#ff00</item> 
+    </style>
+
+	<style name="Theme" parent="android:Theme">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    
+    <style name="Theme.Notitle" parent="android:Theme">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>
