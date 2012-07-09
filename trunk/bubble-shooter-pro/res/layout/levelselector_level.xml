@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextView android:textSize="22.0sp" 
+	android:textColor="#ff000000" android:gravity="center"
+	android:id="@+id/tv_levelselector_level" android:background="@drawable/locked"
+	android:focusableInTouchMode="true" android:layout_width="fill_parent"
+	android:layout_height="wrap_content" xmlns:android="http://schemas.android.com/apk/res/android" />

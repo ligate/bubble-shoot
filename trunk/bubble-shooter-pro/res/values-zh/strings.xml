@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">泡泡龙</string>
+    <string name="menu_new_game">新游戏</string>
+    <string name="menu_colorblind_mode_on">Colorblind Mode On</string>
+    <string name="menu_colorblind_mode_off">Colorblind Mode Off</string>
+    <string name="menu_fullscreen_on">Fullscreen On</string>
+    <string name="menu_fullscreen_off">Fullscreen Off</string>
+    <string name="menu_sound_on">启用声音</string>
+    <string name="menu_sound_off">关闭声音</string>
+    <string name="menu_about">关于泡泡龙</string>
+    <string name="menu_dont_rush_me">不要催促我！</string>
+    <string name="menu_rush_me">催促我</string>
+    <string name="menu_editor">关卡编辑</string>
+    <string name="menu_pick_level">选择关卡</string>
+    
+    <string name="menu_button_score">街机模式排行榜</string>
+	<string name="menu_button_level">关卡模式排行榜 </string>
+	<string name="menu_button_honor">我的成就</string>
+    
+    <string name="menu_pass_by_credit">跳过关卡(%s)</string>
+    
+    <string name="install_editor">Redirecting you to the Market to download the Frozen Bubble Level Editor...</string>
+    <string name="market_missing">Cannot find Android Market! Please install Frozen Bubble Level Editor manually.</string>
+    
+    
+    <string name="page_title_welcome">泡泡龙</string>
+    <string name="button_nav_resume_game">继续</string>
+    <string name="button_nav_select_new_game">开始</string>
+    <string name="button_nav_select_level">选择关卡</string>
+    <string name="button_nav_settings">设置</string>
+    <string name="button_nav_help">帮助</string>
+    <string name="button_nav_more">更多游戏</string>
+    <string name="button_nav_points">赚取积分</string>
+    
+    <string name="button_nav_about">关于</string>
+    
+    
+    <!-- 积分国际化 -->
+    <string name="app_point_dialog_continue">继续游戏</string>
+    <string name="app_point_dialog_earnPoints">免费赚取积分</string>
+    
+    <string name="app_point_dialog_lesspoint_msg_title">尚无可用的跳过关卡的机会</string>
+    <string name="app_point_dialog_lesspoint_msg_content" formatted ="false">每射击达%s次，系统会送你一次跳过关卡的机会，您的当前已射击:%s次</string>
+    
+    <string name="new_game_dialog_title">新游戏</string>
+    <string name="new_game_dialog_content">确定要重新开始吗？重新开始，将会清除你当前的总分，并从街机模式的第1关开始。</string>
+    <string name="new_game_dialog_yes">确定</string>
+    <string name="new_game_dialog_no">取消</string>
+    
+    
+    <string name="arcade_mode_name">街机模式</string>
+</resources>
