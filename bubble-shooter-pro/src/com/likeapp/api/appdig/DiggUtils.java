@@ -8,7 +8,6 @@ import android.net.NetworkInfo;
 
 public class DiggUtils {
 	private static final String DIGG_PREFERENCES = "digg.preferences";
-
 	public static boolean isNetWorkAvailable(Context context) {
 		boolean result = false;
 		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

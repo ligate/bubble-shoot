@@ -45,6 +45,8 @@
  *
  *          [[ http://glenn.sanson.free.fr/fb/ ]]
  *          [[ http://www.frozen-bubble.org/   ]]
+ *          
+ * Bubble-Shooter-Pro Project:http://code.google.com/p/bubble-shoot/
  */
 // This file is derived from the LunarLander.java file which is part of
 // the Lunar Lander game included with Android documentation.  The copyright
@@ -78,15 +80,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.Toast;
 
-import com.admogo.AdMogoManager;
 import com.google.ads.AdView;
 import com.likeapp.game.bubbleshooter.GameConfig.GameMode;
 import com.likeapp.game.bubbleshooter.arcade.ArcadeGameView;
 import com.likeapp.game.bubbleshooter.arcade.ArcadeGameView.GameThread;
 import com.likeapp.game.bubbleshooter.arcade.ScoreManager;
-import com.likeapp.game.utils.MgAdUtils;
 
 public class BubbleArcadeActivity extends Activity {
 	public final static int SOUND_WON = 0;
@@ -120,7 +119,6 @@ public class BubbleArcadeActivity extends Activity {
 	public final static String PREFS_LEVEL_KEY_NAME = "level";// 当前关卡索引
 	public final static String PREFS_UNLOCK_LEVEL_KEY_NAME = "Unlock_level";// 解锁的最大关数
 	private static int gameMode = GAME_NORMAL;
-	private static boolean soundOn = true;
 	private static boolean dontRushMe = false;
 
 	private boolean fullscreen = true;
@@ -153,27 +151,10 @@ public class BubbleArcadeActivity extends Activity {
 	}
 
 	private void fullScreen(boolean enable) {
-
-		/*
-		 * if(enable){ // go full screen WindowManager.LayoutParams attrs =
-		 * getWindow().getAttributes(); attrs.flags |=
-		 * WindowManager.LayoutParams.FLAG_FULLSCREEN;
-		 * getWindow().setAttributes(attrs);
-		 * getWindow().addFlags(WindowManager.LayoutParams
-		 * .FLAG_LAYOUT_NO_LIMITS); //hideStatusBar=true; }else{ // go non-full
-		 * screen WindowManager.LayoutParams attrs =
-		 * getWindow().getAttributes(); attrs.flags &=
-		 * (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		 * getWindow().setAttributes(attrs);
-		 * getWindow().clearFlags(WindowManager
-		 * .LayoutParams.FLAG_LAYOUT_NO_LIMITS); //hideStatusBar=false; }
-		 */
 	}
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
-		// TODO Auto-generated method stub
-
 		super.onWindowFocusChanged(hasFocus);
 		fullScreen(true);
 	}
@@ -183,26 +164,6 @@ public class BubbleArcadeActivity extends Activity {
 		super.onPrepareOptionsMenu(menu);
 		menu.findItem(MENU_SOUND_ON).setVisible(!getSoundOn());
 		menu.findItem(MENU_SOUND_OFF).setVisible(getSoundOn());
-
-		// 中文用户才可 使用积分墙功能
-
-		// Calendar c1 = Calendar.getInstance();
-		// c1.set(2011, Calendar.SEPTEMBER, 23);
-		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		// System.out.println(sdf.format(c1.getTime()));
-		// Calendar now = Calendar.getInstance();
-		// System.out.println(sdf.format(now.getTime()));
-		// System.out.println(now.after(c1));
-		
-
-		// menu.findItem(MENU_COLORBLIND_MODE_ON).setVisible(getMode() ==
-		// GAME_NORMAL);
-		// menu.findItem(MENU_COLORBLIND_MODE_OFF).setVisible(getMode() !=
-		// GAME_NORMAL);
-		// menu.findItem(MENU_FULLSCREEN_ON).setVisible(!fullscreen);
-		// menu.findItem(MENU_FULLSCREEN_OFF).setVisible(fullscreen);
-		// menu.findItem(MENU_DONT_RUSH_ME).setVisible(!getDontRushMe());
-		// menu.findItem(MENU_RUSH_ME).setVisible(getDontRushMe());
 		return true;
 	}
 
@@ -314,11 +275,8 @@ public class BubbleArcadeActivity extends Activity {
 			setContentView(R.layout.arcade_main);
 			mGameView = (ArcadeGameView) findViewById(R.id.game);
 
-			// 广告
-
 			// final LinearLayout adLayout =
 			// (LinearLayout)findViewById(R.id.adLayout);
-			MgAdUtils.initAdsmogo(this, null,	"f48978ae26e2426e8e66d29e8ea6ed4e", false);
 			// AdUtils.initAd(this, adLayout);
 		} else {
 			// Get custom level last played.
@@ -406,12 +364,7 @@ public class BubbleArcadeActivity extends Activity {
 		}
 		mGameView = null;
 		mGameThread = null;
-
-		// 保存分数
 		ScoreManager.getInstance().save();
-
-		// 广告清理
-		AdMogoManager.clear();
 	}
 
 	/**
@@ -460,6 +413,4 @@ public class BubbleArcadeActivity extends Activity {
 			}
 		}
 	}
-
-	
 }

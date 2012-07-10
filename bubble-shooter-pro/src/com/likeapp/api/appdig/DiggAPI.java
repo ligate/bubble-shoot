@@ -1,8 +1,57 @@
-﻿package com.likeapp.api.appdig;
+﻿/*
+ *                 [[ Frozen-Bubble ]]
+ *
+ * Copyright (c) 2000-2003 Guillaume Cottenceau.
+ * Java sourcecode - Copyright (c) 2003 Glenn Sanson.
+ *
+ * This code is distributed under the GNU General Public License
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * version 2, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *
+ * Artwork:
+ *    Alexis Younes <73lab at free.fr>
+ *      (everything but the bubbles)
+ *    Amaury Amblard-Ladurantie <amaury at linuxfr.org>
+ *      (the bubbles)
+ *
+ * Soundtrack:
+ *    Matthias Le Bidan <matthias.le_bidan at caramail.com>
+ *      (the three musics and all the sound effects)
+ *
+ * Design & Programming:
+ *    Guillaume Cottenceau <guillaume.cottenceau at free.fr>
+ *      (design and manage the project, whole Perl sourcecode)
+ *
+ * Java version:
+ *    Glenn Sanson <glenn.sanson at free.fr>
+ *      (whole Java sourcecode, including JIGA classes
+ *             http://glenn.sanson.free.fr/jiga/)
+ *
+ * Android port:
+ *    Pawel Aleksander Fedorynski <pfedor@fuw.edu.pl>
+ *    Copyright (c) Google Inc.
+ *
+ *          [[ http://glenn.sanson.free.fr/fb/ ]]
+ *          [[ http://www.frozen-bubble.org/   ]]
+ *          
+ * Bubble-Shooter-Pro:http://code.google.com/p/bubble-shoot/
+ */
+package com.likeapp.api.appdig;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
 public class DiggAPI implements DiggConstant {
 
@@ -13,10 +62,7 @@ public class DiggAPI implements DiggConstant {
 		
 		boolean blNetWorkAvailable = DiggUtils.isNetWorkAvailable(context);
 		boolean isInstalled = DiggUtils.isInstalled(context, DIGG_APP_PKGNAME);
-		//1.包名没有被安装过，2.有网络连接
 		if (blNetWorkAvailable && !isInstalled) {
-			// 没有时间key(lastDplTime < 0)：1.第一次下载 2.第一次升级到这个版本
-			// 两种情况：没有时间key和超过时间间隔，都必须弹出DIGG窗口
 			if (lastDplTime < 0 || (curTime - lastDplTime) >= DIGG_PERIOD_TIME) {
 				DiggUtils.setLastDispalyTime(context, curTime);
 				
@@ -31,24 +77,10 @@ public class DiggAPI implements DiggConstant {
 	
 	public static void openMoreBoard(Context ctx) {
 		Context context = ctx;
-		//long lastDplTime = DiggUtils.getLastDispalyTime(context);
-		//long curTime = System.currentTimeMillis();
-		
-		//boolean blNetWorkAvailable = DiggUtils.isNetWorkAvailable(context);
-		//boolean isInstalled = DiggUtils.isInstalled(context, DIGG_APP_PKGNAME);
-		//1.包名没有被安装过，2.有网络连接
-		//if (blNetWorkAvailable) {
-			// 没有时间key(lastDplTime < 0)：1.第一次下载 2.第一次升级到这个版本
-			// 两种情况：没有时间key和超过时间间隔，都必须弹出DIGG窗口
-			//if (lastDplTime < 0 || (curTime - lastDplTime) >= DIGG_PERIOD_TIME) {
-				//DiggUtils.setLastDispalyTime(context, curTime);
-				
-				Intent it = new Intent();
-				it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				it.setClass(context, DiggActivity.class);
-				it.putExtra(DiggConstant.IS_AUTO_CLOSE_KEY, false);
-				context.startActivity(it);
-			//}
-		//}
+		Intent it = new Intent();
+		it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		it.setClass(context, DiggActivity.class);
+		it.putExtra(DiggConstant.IS_AUTO_CLOSE_KEY, false);
+		context.startActivity(it);
 	}
 }

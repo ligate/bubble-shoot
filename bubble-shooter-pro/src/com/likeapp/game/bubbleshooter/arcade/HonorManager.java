@@ -1,10 +1,6 @@
-/**
- * 
- */
 package com.likeapp.game.bubbleshooter.arcade;
 
 /**
- * 成就 管理
  * @author Jackyli
  *
  */

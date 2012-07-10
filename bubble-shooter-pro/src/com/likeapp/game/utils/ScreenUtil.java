@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 
 /**
- * 屏幕信息类
  */
 public final class ScreenUtil {
 	public static int dip2px(Context context, float dipValue) {
@@ -28,7 +27,6 @@ public final class ScreenUtil {
 	}
 	
 	/**
-	 * 判断是否为hdpi屏幕
 	 * @param ctx
 	 * @return
 	 */
