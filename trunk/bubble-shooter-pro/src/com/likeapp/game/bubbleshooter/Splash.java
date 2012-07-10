@@ -86,7 +86,6 @@ public class Splash extends Activity implements OnClickListener {
 	private Button appPointButton;
 	private SharedPreferences sp;
 	private int unLockLevel;
-	private int REMCOMMEND_LIMIT_UNLOCKLEVEL = 50;// 当用户玩关卡解锁到指定的级别才开始推荐
 	private RankPopupWindowManager popupManager;
 	/** Called when the activity is first created. */
 	@Override
@@ -98,9 +97,6 @@ public class Splash extends Activity implements OnClickListener {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.splash);
-		
-		// Crash Handler
-		//CrashHandler.getInstance().init(getApplicationContext());
 		
 		// ad
 		final LinearLayout adLayout = (LinearLayout) findViewById(R.id.adLayout);
@@ -118,7 +114,6 @@ public class Splash extends Activity implements OnClickListener {
 		helpButton.setOnClickListener(this);
 		appPointButton = (Button) this.findViewById(R.id.appPointButton);
 		appPointButton.setOnClickListener(this);
-		// 中文用户才可 使用积分墙功能
 		appPointButton.setVisibility("CN".equals(Locale.getDefault()
 				.getCountry()) ? View.VISIBLE : View.GONE);
 		//
@@ -126,10 +121,9 @@ public class Splash extends Activity implements OnClickListener {
 
 		findViewById(R.id.btnArcade).setOnClickListener(this);
 		findViewById(R.id.btnLeaderboard).setOnClickListener(this);
-
+		findViewById(R.id.btnAbout).setOnClickListener(this);
 		
 
-		// 兼容旧版本
 		sp = this.getSharedPreferences(BubbleShooterActivity.PREFS_NAME,
 				Context.MODE_PRIVATE);
 		unLockLevel = sp.getInt(
@@ -146,11 +140,9 @@ public class Splash extends Activity implements OnClickListener {
 		
 		GameConfig.getInstance().init(this);
 		ScoreManager.getInstance().init(this);
-		//Log.i("jackyli", ScoreManager.OPEN_FEINT_NAME);
 		popupManager = new RankPopupWindowManager(this);
 		popupManager.setupPopup(getApplicationContext());
 		
-		//推荐
 		DiggAPI.start(getApplicationContext());
 		//ScoreManager.getInstance().initGameCenter(this);
 	}
@@ -169,19 +161,14 @@ public class Splash extends Activity implements OnClickListener {
 		Intent i = null;
 		switch (v.getId()) {
 		case R.id.resumeGameButton:
-			// 继续游戏,保持原来的关卡
 			i = new Intent(this, BubbleShooterActivity.class);
 			break;
 		case R.id.newGameButton:
-			// 重新开始游戏,即关卡复们为0
 			i = new Intent(this, BubbleShooterActivity.class);
-			// i.putExtra("levelCustom", 0);
 			sp.edit().putInt(BubbleShooterActivity.PREFS_LEVEL_KEY_NAME, 0)
 					.commit();
 			break;
 		case R.id.selectLevelButton:
-			// 关卡选择
-			// this.showDialog(DIALOG_SELECT_LEVELS);
 			i = new Intent(this, LevelSelectorActivity.class);
 			break;
 
@@ -190,14 +177,9 @@ public class Splash extends Activity implements OnClickListener {
 			break;
 
 		case R.id.moreAppButton:
-			/*i = new Intent(Intent.ACTION_VIEW,
-					Uri.parse("market://search?q=pub:\"AL GAME\""));*/
-			//推荐
 			 DiggAPI.openMoreBoard(getApplicationContext());
-			 Log.i("jackyli","打开推荐");
 			break;
 		case R.id.helpButton:
-			// 帮助
 			break;
 		
 		case R.id.btnLeaderboard:
@@ -205,10 +187,14 @@ public class Splash extends Activity implements OnClickListener {
 				popupManager.showPopup(v);
 			}catch(Exception e){}
 			break;
+		case R.id.btnAbout:
+			i = new Intent(this, AboutActivity.class);
+			break;
 		}
 		if (i != null) {
 			startActivity(i);
 		}
+		
 	}
 
 	@Override
@@ -224,14 +210,8 @@ public class Splash extends Activity implements OnClickListener {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && popupManager.isRankWindowShowing()) {
-			//if(popupManager.isRankWindowShowing()){
 				popupManager.dissmissRankWindow();
 				return true;
-			//}
-			
-			//showDialog(EXIT_CONFIRM_DIALOG);
-			//return false;
-
 		}
 		return super.onKeyDown(keyCode, event);
 	}

@@ -30,6 +30,8 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".AboutActivity"   android:configChanges="orientation|keyboardHidden"   android:screenOrientation="portrait" />
+        <activity
             android:name=".BubbleShooterActivity"   android:configChanges="orientation|keyboardHidden"   android:screenOrientation="portrait" />
         <activity
             android:name=".LevelSelectorActivity"  android:label="@string/activity_name_levelselector"   android:theme="@android:style/Theme.Dialog" />
