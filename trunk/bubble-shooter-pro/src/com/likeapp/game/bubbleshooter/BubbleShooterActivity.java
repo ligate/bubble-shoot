@@ -45,6 +45,8 @@
  *
  *          [[ http://glenn.sanson.free.fr/fb/ ]]
  *          [[ http://www.frozen-bubble.org/   ]]
+ *          
+ * Bubble-Shooter-Pro Project:http://code.google.com/p/bubble-shoot/
  */
 // This file is derived from the LunarLander.java file which is part of
 // the Lunar Lander game included with Android documentation.  The copyright
@@ -83,11 +85,9 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.admogo.AdMogoManager;
 import com.google.ads.AdView;
 import com.likeapp.game.bubbleshooter.GameConfig.GameMode;
 import com.likeapp.game.bubbleshooter.GameView.GameThread;
-import com.likeapp.game.utils.MgAdUtils;
 
 public class BubbleShooterActivity extends Activity {
 	public final static int SOUND_WON = 0;
@@ -115,12 +115,12 @@ public class BubbleShooterActivity extends Activity {
 	public final static int MENU_NEW_GAME = 9;
 	public final static int MENU_ABOUT = 10;
 	public final static int MENU_EDITOR = 11;	
-	public final static int MENU_PASS_BY_CREDIT = 12;//用积分pass
-	public final static int MENU_PICK_LEVEL = 13;//
+	public final static int MENU_PASS_BY_CREDIT = 12;
+	public final static int MENU_PICK_LEVEL = 13;
 	
 	public final static String PREFS_NAME = "frozenbubble";
-	public final static String PREFS_LEVEL_KEY_NAME="level";//当前关卡索引
-	public final static String PREFS_UNLOCK_LEVEL_KEY_NAME="Unlock_level";//解锁的最大关数
+	public final static String PREFS_LEVEL_KEY_NAME="level";
+	public final static String PREFS_UNLOCK_LEVEL_KEY_NAME="Unlock_level";
 	private static int gameMode = GAME_NORMAL;
 	private static boolean soundOn = true;
 	private static boolean dontRushMe = false;
@@ -130,7 +130,7 @@ public class BubbleShooterActivity extends Activity {
 
 	public static final String SKIP_CHANCE_KEY = "skipChance";
 	public static final String SHOOT_NUMBER_OF_SKIP_CHANCE_KEY = "shootNumberOfSkipChanceKey";
-	private static final int PASS_LEVEL_NEED_SHOOT_NUMBER = 2000;//每射击出1000颗球，可获取一次跳过关卡的机会
+	private static final int PASS_LEVEL_NEED_SHOOT_NUMBER = 2000;
 	private GameThread mGameThread;
 	private GameView mGameView;
 
@@ -141,47 +141,19 @@ public class BubbleShooterActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, MENU_NEW_GAME, 0, R.string.menu_new_game);
-		// menu.add(0, MENU_COLORBLIND_MODE_ON, 0,
-		// R.string.menu_colorblind_mode_on);
-		// menu.add(0, MENU_COLORBLIND_MODE_OFF, 0,
-		// R.string.menu_colorblind_mode_off);
-		// menu.add(0, MENU_FULLSCREEN_ON, 0, R.string.menu_fullscreen_on);
-		// menu.add(0, MENU_FULLSCREEN_OFF, 0, R.string.menu_fullscreen_off);
 		menu.add(0, MENU_SOUND_ON, 0, R.string.menu_sound_on);
 		menu.add(0, MENU_SOUND_OFF, 0, R.string.menu_sound_off);
 		menu.add(0, MENU_PASS_BY_CREDIT, 0, R.string.menu_pass_by_credit);
 		menu.add(0,MENU_PICK_LEVEL,0,R.string.menu_pick_level);
 		
-		// menu.add(0, MENU_DONT_RUSH_ME, 0, R.string.menu_dont_rush_me);
-		// menu.add(0, MENU_RUSH_ME, 0, R.string.menu_rush_me);
-		// menu.add(0, MENU_ABOUT, 0, R.string.menu_about);
-
-		// menu.add(0, MENU_EDITOR, 0, R.string.menu_editor);
 		return true;
 	}
 	private void fullScreen(boolean enable) {
 		
-		/*if(enable){
-	    	// go full screen
-	    	WindowManager.LayoutParams attrs = getWindow().getAttributes();
-	    	attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-	    	getWindow().setAttributes(attrs);
-	    	getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-	    	//hideStatusBar=true;
-    	}else{
-	    	// go non-full screen
-	    	WindowManager.LayoutParams attrs = getWindow().getAttributes();
-	    	attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-	    	getWindow().setAttributes(attrs);
-	    	getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-	    	//hideStatusBar=false;
-    	}*/
 	}
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
-		// TODO Auto-generated method stub
-		
 		super.onWindowFocusChanged(hasFocus);
 		fullScreen(true);
 	}
@@ -192,18 +164,6 @@ public class BubbleShooterActivity extends Activity {
 		menu.findItem(MENU_SOUND_ON).setVisible(!getSoundOn());
 		menu.findItem(MENU_SOUND_OFF).setVisible(getSoundOn());
 		
-		//中文用户才可 使用积分墙功能
-		
-		//Calendar c1 = Calendar.getInstance();
-		//c1.set(2011, Calendar.SEPTEMBER, 23);
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		//System.out.println(sdf.format(c1.getTime()));
-		//Calendar now = Calendar.getInstance();
-		//System.out.println(sdf.format(now.getTime()));
-		//System.out.println(now.after(c1));
-		//SharedPreferences sp =  this.getSharedPreferences(BubbleShooterActivity.PREFS_NAME, Context.MODE_PRIVATE);	
-		//int level = sp.getInt(BubbleShooterActivity.PREFS_LEVEL_KEY_NAME, 0);
-		//30关以上方可使用“跳过”的功能
 		long shootNumber = GameConfig.getInstance().get(SHOOT_NUMBER_OF_SKIP_CHANCE_KEY, 0L);//射击次数
 		if(shootNumber>=PASS_LEVEL_NEED_SHOOT_NUMBER){
 			GameConfig.getInstance().put(SHOOT_NUMBER_OF_SKIP_CHANCE_KEY, 0L);
@@ -212,14 +172,6 @@ public class BubbleShooterActivity extends Activity {
 		int skipChance = GameConfig.getInstance().get(BubbleShooterActivity.SKIP_CHANCE_KEY, 0);
 		menu.findItem(MENU_PASS_BY_CREDIT).setTitle(String.format(this.getString(R.string.menu_pass_by_credit),skipChance));
 		
-		// menu.findItem(MENU_COLORBLIND_MODE_ON).setVisible(getMode() ==
-		// GAME_NORMAL);
-		// menu.findItem(MENU_COLORBLIND_MODE_OFF).setVisible(getMode() !=
-		// GAME_NORMAL);
-		// menu.findItem(MENU_FULLSCREEN_ON).setVisible(!fullscreen);
-		// menu.findItem(MENU_FULLSCREEN_OFF).setVisible(fullscreen);
-		// menu.findItem(MENU_DONT_RUSH_ME).setVisible(!getDontRushMe());
-		// menu.findItem(MENU_RUSH_ME).setVisible(getDontRushMe());
 		return true;
 	}
 
@@ -263,13 +215,11 @@ public class BubbleShooterActivity extends Activity {
 			return true;
 		
 		case MENU_PASS_BY_CREDIT:
-			//当用户玩超过指定时间数时，自动送1次的跳过机会
 			int startingLevel = sp.getInt("level", 0);
 			int maxLevel = sp.getInt(BubbleShooterActivity.PREFS_UNLOCK_LEVEL_KEY_NAME, 0);
 			int chance = GameConfig.getInstance().get(SKIP_CHANCE_KEY, 0);
 			long shootNumber = GameConfig.getInstance().get(SHOOT_NUMBER_OF_SKIP_CHANCE_KEY, 0L);//射击次数
 			if(maxLevel<=startingLevel&&chance<=0){
-				//
 				showPointMessageBox(BubbleShooterActivity.this.getResources().getString(R.string.app_point_dialog_lesspoint_msg_title)
 						,String.format(BubbleShooterActivity.this.getResources().getString(R.string.app_point_dialog_lesspoint_msg_content), new Object[]{PASS_LEVEL_NEED_SHOOT_NUMBER, shootNumber}));
 				
@@ -277,8 +227,6 @@ public class BubbleShooterActivity extends Activity {
 				if(chance>0 && maxLevel<=startingLevel){
 					chance=chance - 1;
 					GameConfig.getInstance().put(SKIP_CHANCE_KEY, chance);
-					//Toast.makeText(BubbleShooterActivity.this, String.format(BubbleShooterActivity.this.getResources().getString(R.string.app_point_toast_info_use),PointAdUtils.passLevelNeedPoints), 1000).show();		
-					
 				}
 				mGameView.getThread().nextLevel();
 			}
@@ -294,13 +242,6 @@ public class BubbleShooterActivity extends Activity {
 	}
 
 	private void setFullscreen() {
-		/*if (fullscreen) {
-			getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-		} else {
-			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-			getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-		}*/
 		mGameView.requestLayout();
 	}
 
@@ -347,10 +288,7 @@ public class BubbleShooterActivity extends Activity {
 			setContentView(R.layout.main);
 			mGameView = (GameView) findViewById(R.id.game);	
 			
-		   //广告
-			
 			//final LinearLayout adLayout = (LinearLayout)findViewById(R.id.adLayout);
-			MgAdUtils.initAdsmogo(this, null, "f48978ae26e2426e8e66d29e8ea6ed4e", false);
 			//AdUtils.initAd(this, adLayout);
 		} else {
 			// Get custom level last played.
@@ -381,9 +319,8 @@ public class BubbleShooterActivity extends Activity {
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-		long shootNumber = GameConfig.getInstance().get(SHOOT_NUMBER_OF_SKIP_CHANCE_KEY, 0L);//射击次数
+		long shootNumber = GameConfig.getInstance().get(SHOOT_NUMBER_OF_SKIP_CHANCE_KEY, 0L);
 		if(shootNumber>=PASS_LEVEL_NEED_SHOOT_NUMBER){
 			GameConfig.getInstance().put(SHOOT_NUMBER_OF_SKIP_CHANCE_KEY, 0L);
 			GameConfig.getInstance().put(SKIP_CHANCE_KEY, 1);
@@ -441,8 +378,6 @@ public class BubbleShooterActivity extends Activity {
 		}
 		mGameView = null;
 		mGameThread = null;
-		//广告清理
-		AdMogoManager.clear();
 	}
 
 	/**
@@ -526,22 +461,9 @@ public class BubbleShooterActivity extends Activity {
 				}
 				
 			});
-			/*dialog.setButton2(BubbleShooterActivity.this.getResources().getString(R.string.app_point_dialog_earnPoints), new OnClickListener(){
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					//积分墙
-					//PointAdUtils.init(BubbleShooterActivity.this);
-					//PointAdUtils.showAppOffers(BubbleShooterActivity.this);
-					dialog.dismiss();
-				}
-				
-			});*/
-			
 			dialog.show();
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 	

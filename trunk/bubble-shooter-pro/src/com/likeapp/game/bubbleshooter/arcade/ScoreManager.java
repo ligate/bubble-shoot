@@ -8,15 +8,13 @@ import com.likeapp.game.bubbleshooter.BubbleShooterActivity;
 import com.likeapp.game.bubbleshooter.GameConfig;
 import com.likeapp.game.bubbleshooter.LevelManager;
 import com.likeapp.game.bubbleshooter.R;
-import com.likeapp.game.utils.CookieCrypt;
-import com.likeapp.gamecenter.GameCenterUtils;
+import com.likeapp.game.utils.GameCenterUtils;
 
 /**
  * @author sloanwu 2012-5-15 下午3:17:48
  * 
  */
 public class ScoreManager {
-	public static final String SECRECT_KEY = "bubbleshooter123";
 	/*public static final String OPEN_FEINT_NAME= SDKFlag.FLAG.the9.equals(SDKFlag.flag)?"泡泡龙":"Bubble Shooter";//中文采用九城 :英文官方原版
 	public static final String OPEN_FEINT_KEY = SDKFlag.FLAG.the9.equals(SDKFlag.flag)?"og9c60v6XolfJFigRAQ":"J08TtcwhH2gzHLTxBlJIg";
 	public static final String OPEN_FEINT_SECRET = SDKFlag.FLAG.the9.equals(SDKFlag.flag)?"uzQKicmIkB2eVZg686CYUcKmokMTtXpy":"67aKNRrtEyBdy1CNrBzWZCaiNYpe42eniMHEvfRM";
@@ -37,9 +35,6 @@ public class ScoreManager {
 	public static final String SWARM_PUZZLE_LEADERBORDER_ID = "1369";
 	
 	public static final class HONOR{
-		/**
-		 * 初学乍练：关卡模式过了10
-		 */
 		public static final String CXZL = "7c07eac2ee4645d3";
 		public static final String GreenHorn = "2357";
 		public static void checkCXZL(Activity act,int maxLevel,long score){
@@ -58,7 +53,6 @@ public class ScoreManager {
 			}
 		}
 		/**
-		 * 登堂入室：关卡模式过了100关或街机模式总分超过10000分
 		 */
 		public static final String DTRS = "67dbd380708a6f75";
 		public static final String Scout = "2359";
@@ -78,7 +72,6 @@ public class ScoreManager {
 			}
 		}
 		/**
-		 * 圆转纯熟: 关卡模式过了200关，或待机模式总分超过20000
 		 */
 		public static final String YZCS = "d33538c32932bb43";
 		public static final String Expert = "2361";
@@ -98,7 +91,6 @@ public class ScoreManager {
 			}
 		}
 		/**
-		 * 渐入佳境:关卡模式过了300关，或街机模式总分超过60000分
 		 */
 		public static final String JRJJ = "2912c358ac436e6d";
 		public static final String Professional = "2363";
@@ -118,7 +110,6 @@ public class ScoreManager {
 			}
 		}
 		/**
-		 * 炉火纯青：关卡模式过了400关，或街机模式总分超过100000分
 		 */
 		public static final String LHCQ = "8bdb71a3dbdeb067";
 		public static final String Champion = "2365";
@@ -139,7 +130,6 @@ public class ScoreManager {
 		}
 		
 		/**
-		 * 自成一派：关卡模式过了500关，或街机模式总分超过180000分
 		 */
 		public static final String ZCYP = "dba85bae0a4e33d3";
 		public static final String Master = "2367";
@@ -159,7 +149,6 @@ public class ScoreManager {
 			}
 		}
 		/**
-		 * 功行圆满：关卡模式过了630关，或街机模式总分超过600000分
 		 */
 		public static final String GXYM = "390483cb766fc94d";
 		public static final String GrandMaster = "2369";
@@ -185,12 +174,10 @@ public class ScoreManager {
 	private long score;
 	private long bestScore;
 	
-	private CookieCrypt cookieCrypt;
 
 	private Activity currentActivity;
 	private static boolean isInit = false;
 	private ScoreManager() {
-		cookieCrypt = new CookieCrypt(SECRECT_KEY);
 	}
 
 	public static ScoreManager getInstance() {
@@ -210,7 +197,6 @@ public class ScoreManager {
 		
 	}
 	/**
-	 * 初始化
 	 * @param act
 	 */
 	public void initGameCenter(Activity act){
@@ -304,7 +290,6 @@ public class ScoreManager {
 		GameCenterUtils.submitThenOpenLeadboardActivity(activity, String.valueOf(maxLevel),leaderborderId,leaderbordName);		
 	}
 	/**
-	 * 检查成就
 	 * @param activity
 	 */
 	public void checkHonor(Activity act){
@@ -313,19 +298,12 @@ public class ScoreManager {
 		int maxLevel = sp.getInt(BubbleShooterActivity.PREFS_UNLOCK_LEVEL_KEY_NAME, 0);//
 		long score = this.getBestScore();
 		
-		//初学乍练
 		HONOR.checkCXZL(act,maxLevel,score);
-		//登堂入室
 		HONOR.checkDTRS(act,maxLevel,score);
-		//圆转纯熟
 		HONOR.checkYZCS(act,maxLevel,score);
-		//渐入佳境
 		HONOR.checkJRJJ(act,maxLevel,score);
-		//炉火纯青
 		HONOR.checkLHCQ(act,maxLevel,score);
-		//自成一派
 		HONOR.checkZCYP(act,maxLevel,score);
-		//功行圆满
 		HONOR.checkGXYM(act,maxLevel,score);
 	}
 	

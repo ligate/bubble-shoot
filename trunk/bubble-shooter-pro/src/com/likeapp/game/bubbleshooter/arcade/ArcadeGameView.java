@@ -45,6 +45,8 @@
  *
  *          [[ http://glenn.sanson.free.fr/fb/ ]]
  *          [[ http://www.frozen-bubble.org/   ]]
+ *          
+ * Bubble-Shooter-Pro Project:http://code.google.com/p/bubble-shoot/
  */
 // This file is derived from the LunarView.java file which is part of
 // the Lunar Lander game included with Android documentation.  The copyright

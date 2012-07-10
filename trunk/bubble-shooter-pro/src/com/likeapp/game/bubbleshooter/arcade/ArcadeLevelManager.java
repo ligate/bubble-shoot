@@ -45,6 +45,8 @@
  *
  *          [[ http://glenn.sanson.free.fr/fb/ ]]
  *          [[ http://www.frozen-bubble.org/   ]]
+ *          
+ * Bubble-Shooter-Pro Project:http://code.google.com/p/bubble-shoot/
  */
 
 package com.likeapp.game.bubbleshooter.arcade;

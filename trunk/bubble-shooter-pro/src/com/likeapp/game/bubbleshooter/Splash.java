@@ -1,3 +1,53 @@
+/*
+ *                 [[ Frozen-Bubble ]]
+ *
+ * Copyright (c) 2000-2003 Guillaume Cottenceau.
+ * Java sourcecode - Copyright (c) 2003 Glenn Sanson.
+ *
+ * This code is distributed under the GNU General Public License
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * version 2, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *
+ * Artwork:
+ *    Alexis Younes <73lab at free.fr>
+ *      (everything but the bubbles)
+ *    Amaury Amblard-Ladurantie <amaury at linuxfr.org>
+ *      (the bubbles)
+ *
+ * Soundtrack:
+ *    Matthias Le Bidan <matthias.le_bidan at caramail.com>
+ *      (the three musics and all the sound effects)
+ *
+ * Design & Programming:
+ *    Guillaume Cottenceau <guillaume.cottenceau at free.fr>
+ *      (design and manage the project, whole Perl sourcecode)
+ *
+ * Java version:
+ *    Glenn Sanson <glenn.sanson at free.fr>
+ *      (whole Java sourcecode, including JIGA classes
+ *             http://glenn.sanson.free.fr/jiga/)
+ *
+ * Android port:
+ *    Pawel Aleksander Fedorynski <pfedor@fuw.edu.pl>
+ *    Copyright (c) Google Inc.
+ *
+ *          [[ http://glenn.sanson.free.fr/fb/ ]]
+ *          [[ http://www.frozen-bubble.org/   ]]
+ *          
+ * Bubble-Shooter-Pro Project:http://code.google.com/p/bubble-shoot/
+ */
 package com.likeapp.game.bubbleshooter;
 
 import java.util.Locale;
@@ -9,21 +59,17 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.admogo.AdMogoManager;
 import com.likeapp.api.appdig.DiggAPI;
 import com.likeapp.game.bubbleshooter.arcade.ScoreManager;
-import com.likeapp.game.utils.CrashHandler;
-import com.likeapp.game.utils.MgAdUtils;
-import com.likeapp.gamecenter.tool.P;
 /**
  * 
  * @author jackyli
@@ -59,8 +105,6 @@ public class Splash extends Activity implements OnClickListener {
 		// ad
 		final LinearLayout adLayout = (LinearLayout) findViewById(R.id.adLayout);
 		// AdUtils.initAd(this, adLayout);
-		MgAdUtils.initAdsmogo(this, null, "f48978ae26e2426e8e66d29e8ea6ed4e",false);
-
 		resumeButton = (Button) findViewById(R.id.resumeGameButton);
 		resumeButton.setOnClickListener(this);
 		newButton = (Button) findViewById(R.id.newGameButton);
@@ -175,7 +219,6 @@ public class Splash extends Activity implements OnClickListener {
 
 	@Override
 	protected void onDestroy() {
-		AdMogoManager.clear();
 		super.onDestroy();
 	}
 	@Override
