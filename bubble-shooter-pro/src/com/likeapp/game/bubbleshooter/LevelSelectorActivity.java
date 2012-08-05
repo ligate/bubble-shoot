@@ -108,7 +108,6 @@ public class LevelSelectorActivity extends Activity implements AdapterView.OnIte
 	    sp = this.getSharedPreferences(BubbleShooterActivity.PREFS_NAME, Context.MODE_PRIVATE);	
 	}
 	/**
-	 * 关卡适配器
 	 * @author jackyli
 	 *
 	 */
@@ -126,14 +125,6 @@ public class LevelSelectorActivity extends Activity implements AdapterView.OnIte
 			TelephonyManager tm = (TelephonyManager)LevelSelectorActivity.this.getSystemService(Context.TELEPHONY_SERVICE);  
 			String imei = tm.getDeviceId();   
 			
-			if(//"354635031971620".equals(imei)||
-				"354795046744154".equals(imei)
-				||"354957031875589".equals(imei)
-				||"356723040690999".equals(imei)
-				||"57d286ceeedc4b2845f1c8d7ebe36519".equals(imei)
-				||"000000000000000".equals(imei)){
-				maxLevel = LevelManager.MAX_LEVEL_NUM;
-			}
 			for(int i=1;i<=LevelManager.MAX_LEVEL_NUM;i++){
 				 //levels[i-1] = mContext.getResources().getString(R.string.prefix_level_str)+i;
 				 mLevelInfos.put(i, new LevelSelectorActivity.LevelInfo(i,i<=maxLevel+1));
@@ -220,9 +211,7 @@ public class LevelSelectorActivity extends Activity implements AdapterView.OnIte
 		    paramView.startAnimation(animation);
 	       
 	        	
-    		//进入关卡游戏
     		Intent i = null;
-        	//设置当前关卡                	
         	i = new Intent(LevelSelectorActivity.this, BubbleShooterActivity.class);        	
         	
         	sp.edit().putInt(BubbleShooterActivity.PREFS_LEVEL_KEY_NAME,localLevelInfo.mLevel-1).commit();
@@ -242,13 +231,11 @@ public class LevelSelectorActivity extends Activity implements AdapterView.OnIte
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	

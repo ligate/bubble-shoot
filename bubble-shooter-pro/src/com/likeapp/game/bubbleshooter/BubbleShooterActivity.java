@@ -179,7 +179,7 @@ public class BubbleShooterActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MENU_NEW_GAME:
-			mGameThread.newGame();
+			mGameThread.replayGame();
 			return true;
 		case MENU_COLORBLIND_MODE_ON:
 			setMode(GAME_COLORBLIND);

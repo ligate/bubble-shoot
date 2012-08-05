@@ -63,8 +63,7 @@ import android.os.Bundle;
 
 public class LevelManager {
 	private int currentLevel;
-	public static final int MAX_LEVEL_NUM = 640;// 上一次220最大关卡数
-	// 关卡与关卡数据
+	public static final int MAX_LEVEL_NUM = 640;
 	private Map<String, byte[][]> lvlsMap = new HashMap<String, byte[][]>();
 	private int page;
 	private final int PAGE_SIZE_OF_LEVEL = 10;
@@ -73,7 +72,6 @@ public class LevelManager {
 	private Context mContext;
 	private int maxFixedBubbleCount =0;
 	/**
-	 * 按一定的规则定义：下压间隔的球数
 	 * @return
 	 */
 	public int getMaxFixedBubbleCount(){
@@ -101,7 +99,7 @@ public class LevelManager {
 	private String getLevelFileName(int startingLevel) {
 		page = (startingLevel + 1) / PAGE_SIZE_OF_LEVEL + 1;
 		if ((startingLevel + 1) % PAGE_SIZE_OF_LEVEL == 0) {
-			page--;// 当第PAGE_SIZE_OF_LEVEL*n关时，n=1,2,3.... 余数为0
+			page--;
 		}
 		return "lvl2/" + page + ".txt";
 	}
@@ -198,7 +196,6 @@ public class LevelManager {
 
 	public byte[][] getCurrentLevel() {
 		if(lvlsMap==null || !lvlsMap.containsKey(this.currentLevel+"")){
-			//加载
 			load();
 		}
 		if (currentLevel < MAX_LEVEL_NUM) {
