@@ -69,7 +69,6 @@ public class ArcadeLevelManager {
 	public static final int DEFAULT_MAX_ROW = 12;
 	public static final int DEFAULT_MAX_COL = 8;
 
-	// 关卡与关卡数据
 	private Map<Integer, ArcadeLevel> levelMap = new HashMap<Integer, ArcadeLevel>();
 
 	private Context mContext;
@@ -126,7 +125,6 @@ public class ArcadeLevelManager {
 
 	public byte[][] getCurrentLevel() {
 		if (levelMap == null || !levelMap.containsKey(this.currentLevel)) {
-			// 加载
 			load();
 		}
 		if (currentLevel < MAX_LEVEL_NUM) {

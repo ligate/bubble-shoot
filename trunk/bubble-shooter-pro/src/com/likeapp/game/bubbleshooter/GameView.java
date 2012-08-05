@@ -399,6 +399,19 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback {
                                      mSoundManager, mLevelManager);
       }
     }
+    
+    public void replayGame()
+    {
+      synchronized (mSurfaceHolder) {
+        mFrozenGame = new BubbleShooterGame(mBackground, mBubbles, mBubblesBlind,
+                                     mFrozenBubbles, mTargetedBubbles,
+                                     mBubbleBlink, mGameWon, mGameLost,
+                                     mHurry, mPenguins, mCompressorHead,
+                                     mCompressor, mLauncher, 
+                                     mSoundManager, mLevelManager);
+      }
+    }
+    
     public void nextLevel(){
     	synchronized (mSurfaceHolder) {
             mLevelManager.goToNextLevel();

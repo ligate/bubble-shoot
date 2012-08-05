@@ -44,13 +44,13 @@ public class GameCenterUtils {
 	
 	private static Map<Integer, SwarmAchievement> achievements = null;//new HashMap<Integer, SwarmAchievement>();
 	
-	private static boolean hasLoggedIn = false;//是否已登录swarm
+	private static boolean hasLoggedIn = false;
 	private static  Activity act = null;
 	
 	private static Map<Integer,Float> scoreCache = new ConcurrentHashMap<Integer,Float>();
-	private static Integer currentLeaderBoard =0;//先提交分数再展现排行榜
-	private static boolean isOpenLeaderboardsAfterUserLoggedIn=false;//在登录后，回调打开排行榜列表
-	private static boolean isOpenAchievementAfterUserLoggedIn = false;//在登录后，回调打开成就列表
+	private static Integer currentLeaderBoard =0;
+	private static boolean isOpenLeaderboardsAfterUserLoggedIn=false;
+	private static boolean isOpenAchievementAfterUserLoggedIn = false;
 	private static ConcurrentLinkedQueue<Integer> cacheAchievements = new ConcurrentLinkedQueue<Integer>();
 	private static  SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
 
@@ -69,7 +69,6 @@ public class GameCenterUtils {
 		public void userLoggedIn(SwarmActiveUser user) {
 			Log.i("jackyli","swarm userLoggedIn,cache score = "+scoreCache.size());
 			hasLoggedIn = true;
-			//登录后，把登录前未提交的分数进行提交
 			Set<Integer> leaderbordIds = scoreCache.keySet();
 			if(leaderbordIds!=null && leaderbordIds.size()>0){
 				for(final Integer leaderBoardId:leaderbordIds){
@@ -94,7 +93,6 @@ public class GameCenterUtils {
 					});
 				}
 			}
-			//成就检测
 			if(cacheAchievements!=null && cacheAchievements.size()>0){
 				for(final Integer achievementId:cacheAchievements){
 					Swarm.setActive(act);		
@@ -128,13 +126,11 @@ public class GameCenterUtils {
 				}
 			}
 			
-			//在登录后，回调打开排行榜列表
 			if(isOpenLeaderboardsAfterUserLoggedIn){
 				Swarm.setActive(act);
 				Swarm.showLeaderboards();
 				isOpenLeaderboardsAfterUserLoggedIn = false;
 			}
-			//在登录后，回调打开成就列表
 			if(isOpenAchievementAfterUserLoggedIn){
 				Swarm.setActive(act);
 				Swarm.showAchievements();				
@@ -152,11 +148,9 @@ public class GameCenterUtils {
 
 	};
 	/**
-	 * 初始化
 	 * @param activity
 	 * @param appId
 	 * @param secrectKey
-	 * @param paramMap 允许为null
 	 */
 	public static void init(Activity activity,String appId,String secrectKey,Map<String,String> paramMap) {		
 		Integer appId_ = Integer.parseInt(appId);
@@ -171,7 +165,6 @@ public class GameCenterUtils {
 	
 
 	/**
-	 * 提交分数
 	 * 
 	 * @param scoreValue
 	 */
@@ -190,13 +183,11 @@ public class GameCenterUtils {
 			});
 		}else{
 			Log.i("jackyli","cache score for userloggedin callback");
-			//未登录，先缓存待提交分数
 			scoreCache.put(leaderBoardId, score);
 		}
 	}
 
 	/**
-	 * 打开全球排行榜
 	 */
 	public static void openLeaderboardActivity(Activity act, String _leaderBoardId) {
 		Swarm.setActive(act);
@@ -219,11 +210,8 @@ public class GameCenterUtils {
 	}
 
 	/**
-	 * 先提交本地分数再打开全球排行榜
 	 * @param act
 	 * @param scoreValue
-	 * @param mode			0或1或2...
-	 * @param modeNameStr     模式名
 	 */
 	public static void submitThenOpenLeadboardActivity(final Activity act, final String scoreStr, final String _leaderBoardId, final String modeNameStr) {
 		final Float score = Float.parseFloat(scoreStr);
@@ -242,7 +230,6 @@ public class GameCenterUtils {
 		}else{
 			Log.i("jackyli","cache score for userloggedin callback");
 			currentLeaderBoard = leaderBoardId;
-			//未登录，先缓存待提交分数
 			scoreCache.put(leaderBoardId, score);
 		}
 		
@@ -250,7 +237,6 @@ public class GameCenterUtils {
 	
 	
 	/**
-	 * 打开成就列表
 	 */
 	public static void openAchievementActivity(Activity act){
 		if(hasLoggedIn){
@@ -263,7 +249,6 @@ public class GameCenterUtils {
 	
 
 	/**
-	 * 解锁成就
 	 */
 	public static void unlockAchievement(final Activity act, final String awardIdentifier){		
 		final Integer ACHIEVEMENT_ID = Integer.parseInt(awardIdentifier);
@@ -295,14 +280,7 @@ public class GameCenterUtils {
 				});
 			}
 		}else{
-			//缓存待检测
 			cacheAchievements.add(ACHIEVEMENT_ID);
 		}
-
-		
 	}
-	
-	
-	
-	
 }

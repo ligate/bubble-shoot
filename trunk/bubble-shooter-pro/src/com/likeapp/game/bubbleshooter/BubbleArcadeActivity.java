@@ -116,8 +116,8 @@ public class BubbleArcadeActivity extends Activity {
 
 
 	public final static String PREFS_NAME = "frozenbubble_arcade";
-	public final static String PREFS_LEVEL_KEY_NAME = "level";// 当前关卡索引
-	public final static String PREFS_UNLOCK_LEVEL_KEY_NAME = "Unlock_level";// 解锁的最大关数
+	public final static String PREFS_LEVEL_KEY_NAME = "level";
+	public final static String PREFS_UNLOCK_LEVEL_KEY_NAME = "Unlock_level";
 	private static int gameMode = GAME_NORMAL;
 	private static boolean dontRushMe = false;
 

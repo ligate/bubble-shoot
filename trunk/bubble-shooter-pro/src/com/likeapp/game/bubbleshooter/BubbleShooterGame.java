@@ -130,7 +130,6 @@ public class BubbleShooterGame extends GameScreen {
   Drawable launcher;
   BmpWrap penguins;
   
-  //射击次数
   private int shootTimes = 0;
   public void resetShootTimes(){
 	  shootTimes = 0;
